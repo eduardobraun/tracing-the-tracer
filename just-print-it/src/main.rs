@@ -1,6 +1,7 @@
 use tracing::{error, info};
 use tracing_subscriber;
 
+#[tracing::instrument]
 fn fn_a () {
     info!("hello from fn_a");
     for i in (0..3).rev() {
@@ -9,6 +10,7 @@ fn fn_a () {
     }
 }
 
+#[tracing::instrument]
 fn sub_one (value: u8) -> u8 {
     info!("hello from sub_one");
     match value.checked_sub(1) {
