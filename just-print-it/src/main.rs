@@ -10,7 +10,9 @@ fn fn_a () {
     }
 }
 
-#[tracing::instrument]
+#[tracing::instrument(
+    skip(secret),
+)]
 fn sub_one (value: u8, secret: &str) -> u8 {
     info!("hello from sub_one");
     match value.checked_sub(1) {
