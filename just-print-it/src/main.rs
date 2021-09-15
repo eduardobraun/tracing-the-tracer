@@ -1,4 +1,4 @@
-use tracing::{error, info};
+use tracing::{debug, error, info};
 use tracing_subscriber;
 
 #[tracing::instrument]
@@ -11,10 +11,15 @@ fn fn_a () {
 }
 
 #[tracing::instrument(
+    name = "decrement",
     skip(secret),
+    fields(
+        secret = %"*******",
+    )
 )]
 fn sub_one (value: u8, secret: &str) -> u8 {
     info!("hello from sub_one");
+    debug!(secret, "shhh!");
     match value.checked_sub(1) {
         Some(i) => i,
         None => {
