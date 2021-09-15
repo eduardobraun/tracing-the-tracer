@@ -5,13 +5,13 @@ use tracing_subscriber;
 fn fn_a () {
     info!("hello from fn_a");
     for i in (0..3).rev() {
-        let res = sub_one(i);
+        let res = sub_one(i, "some secret");
         info!(num=i, res, "{}-1={}", i, res);
     }
 }
 
 #[tracing::instrument]
-fn sub_one (value: u8) -> u8 {
+fn sub_one (value: u8, secret: &str) -> u8 {
     info!("hello from sub_one");
     match value.checked_sub(1) {
         Some(i) => i,
